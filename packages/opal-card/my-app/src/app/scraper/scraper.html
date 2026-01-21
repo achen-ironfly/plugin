@@ -1,0 +1,65 @@
+<div class="scraper">
+  <h2>Opal Scraper</h2>
+  <div *ngIf="message" class="alert" [class.error]="messageType==='error'" [class.info]="messageType==='info'">
+    {{ message }}
+  </div>
+  <label>Username (email)
+    <input [(ngModel)]="username" placeholder="xxx@example.com" />
+  </label>
+  <label>Passsword
+    <input type="password" [(ngModel)]="password" />
+  </label>
+  <div class="row">
+    <label>Start date
+      <input [(ngModel)]="startDate" placeholder="MM-DD-YYYY or leave empty" />
+    </label>
+    <label>End date
+      <input [(ngModel)]="endDate" placeholder="MM-DD-YYYY or leave empty" />
+    </label>
+  </div>
+  <div class="checkbox-row">
+    <input id="showBrowser" type="checkbox" [(ngModel)]="showBrowser" />
+    <label for="showBrowser">Open browser during scraping</label>
+  </div>
+
+  <div style="margin-top:10px">
+    <button (click)="run()" [disabled]="running">{{ running ? 'Running...' : 'Run & Show Transactions' }}</button>
+  </div>
+
+  <!-- Progress bar -->
+  <div *ngIf="running" class="progress-wrapper" style="margin-top:12px">
+    <div class="progress-text">
+      {{ progressMessage || ('Progress: ' + progressPercent) }}
+    </div>
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        [style.width.%]="progressPercent">
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="tableError" class="alert error" style="margin-top:10px">{{ tableError }}</div>
+
+  <div *ngIf="previewRows.length" class="table-container" style="margin-top:16px">
+    <h3>Transactions</h3>
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let col of previewColumns">{{ col }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of pagedRows">
+          <td *ngFor="let col of previewColumns">{{ formatCell(row[col]) }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pager" style="margin-top:8px; display:flex; align-items:center; gap:8px">
+      <button (click)="prevPage()" [disabled]="currentPage===1">Prev</button>
+      <span>Page {{ currentPage }} / {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage===totalPages">Next</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+{
+  "name": "@glossplugin/root",
+  "version": "1.0.0",
+  "description": "Gloss Plugin Monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/opal-card",
+    "packages/snaptrade"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "dev:opal-card": "npm run dev:server --workspace=@glossplugin/opal-card",
+    "dev:snaptrade": "npm run dev --workspace=@glossplugin/snaptrade"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

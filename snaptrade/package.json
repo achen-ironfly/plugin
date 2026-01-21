@@ -1,0 +1,27 @@
+{
+  "name": "@glossplugin/snaptrade",
+  "version": "1.0.0",
+  "description": "Snaptrade - Glossplugin Package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx ts-node ./graphql/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@apollo/server": "^5.2.0",
+    "dotenv": "^17.2.3",
+    "graphql": "^16.12.0",
+    "node-fetch": "^3.3.2",
+    "playwright": "^1.57.0",
+    "snaptrade-typescript-sdk": "^9.0.158"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3"
+  }
+}

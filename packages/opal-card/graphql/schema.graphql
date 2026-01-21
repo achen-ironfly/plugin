@@ -1,0 +1,32 @@
+scalar JSON
+
+type Auth {
+    response: String
+    identifier: String
+}
+
+type Transaction {
+    transactionId: ID
+    transactionTime: String
+    amount: Float
+    currency: String
+    description: String
+    status: String
+    balance: Float
+}
+
+type Account {
+    id: String
+    name: String
+    balance: Float
+    currency: String
+}
+
+type Mutation {
+    auth(payload: JSON): Auth
+}
+
+type Query {
+    account(identifier: String): [Account]
+    transaction(identifier: String): [Transaction]
+}

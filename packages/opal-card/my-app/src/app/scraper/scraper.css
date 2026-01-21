@@ -1,0 +1,118 @@
+/* Style for progress */ 
+.progress-wrapper {
+  width: 100%;
+}
+
+.progress-text {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #3b82f6;
+  transition: width 0.2s ease;
+}
+
+/* Font for transactions table */
+.table-container table {
+	font-size: 12px;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.table-container thead th,
+.table-container tbody td {
+	padding: 4px 6px;
+}
+
+.table-container thead th {
+	font-weight: 600;
+}
+
+.table-container tbody tr:nth-child(even) {
+	background: #f7f7f7;
+}
+.pager span { 
+	font-size: 12px; 
+}
+.pager button { 
+	font-size: 12px; 
+}
+.scraper { 
+	max-width:720px; 
+	margin:16px auto; 
+	font-family: Arial, Helvetica, sans-serif 
+}
+.scraper h2 { 
+	text-align:center; 
+	margin: 0 0 12px; 
+}
+.scraper .alert { 
+	padding:10px; 
+	border-radius:4px; 
+	margin-bottom:10px; 
+	font-size:14px 
+}
+.scraper .alert.info { 
+	background:#e8f2ff; 
+	color:#0b5ea8; 
+	border:1px solid #b8d4ff 
+}
+.scraper .alert.error { 
+	background:#ffecec; 
+	color:#a80b0b; 
+	border:1px solid #ffb8b8 
+}
+.scraper label { 
+	display:block; 
+	margin-top:8px
+}
+.scraper input { 
+	padding:8px; 
+	width:100%; 
+	box-sizing:border-box 
+}
+.scraper .row { 
+	display:flex;
+	gap:12px 
+}
+.scraper .row > label { 
+	flex:1 
+}
+button[disabled] { 
+	opacity:0.6 
+}
+
+/* Style for Checkbox */
+.scraper .checkbox-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 8px;
+}
+.scraper .checkbox-row input[type="checkbox"] {
+	margin: 0;
+	transform: translateY(0);
+	width: auto;
+	padding: 0;
+}
+.scraper .checkbox-row label {
+	display: inline;
+}
+.scraper .checkbox-row {
+	white-space: nowrap;
+}
+.scraper .checkbox-row label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: calc(100% - 40px);
+}
