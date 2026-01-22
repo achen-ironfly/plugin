@@ -8,13 +8,11 @@
     "packages/snaptrade"
   ],
   "scripts": {
-    "dev": "npm run dev --workspaces",
-    "build": "npm run build --workspaces",
-    "test": "npm run test --workspaces",
     "dev:opal-card": "npm run dev:server --workspace=@glossplugin/opal-card",
     "dev:snaptrade": "npm run dev --workspace=@glossplugin/snaptrade"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "typescript": "^5.9.3"
   }
 }
