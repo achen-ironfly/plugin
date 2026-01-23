@@ -45,8 +45,7 @@ npm run serve
 
 ### Start Frontend
 ```powershell
-cd my-app
-npx ng serve --proxy-config proxy.conf.json
+npm start
 ```
 The app will be available at `http://localhost:4200`.
 

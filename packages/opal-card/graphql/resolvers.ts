@@ -46,6 +46,7 @@ export const resolvers = {
                 }
                 try {
                     const accounts = await getAccounts(context);
+                    console.log('[account] get account successful');
                     return accounts;
                 } catch (err) {
                     console.error(err);
@@ -62,6 +63,7 @@ export const resolvers = {
                 }
                 try {
                     const transactions = await getTransactions(context, null, null);
+                    console.log('[transaction] get transaction successful');
                     return (transactions || []).map((t: any) => ({
                         transactionId: t.transactionId,
                         transactionTime: t.transactionTime,

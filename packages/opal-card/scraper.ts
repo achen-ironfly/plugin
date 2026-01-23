@@ -173,7 +173,7 @@ export async function login(username: string, password: string, showBrowser: boo
         const res: any = await Promise.race([successPromise, errorPromise]);
 
         if (res && res.type === 'success') {
-            console.log('Login successful');
+            console.log('[Login] Login successful');
             return context;
         }
 
@@ -182,11 +182,11 @@ export async function login(username: string, password: string, showBrowser: boo
             try { text = (await res.el.innerText()).trim(); } catch (e) { /* ignore */ }
             const lower = (text || '').toLowerCase();
             if (/invalid|incorrect|wrong|not match|password|username|email/.test(lower)) {
-                console.error('Login failed: Invalid username or password');
+                console.error('[Login] Login failed: Invalid username or password');
             } else if (text) {
-                console.error('Login failed:', text);
+                console.error('[Login] Login failed:', text);
             } else {
-                console.error('Login failed: unknown error');
+                console.error('[Login] Login failed: unknown error');
             }
             try { if (browser) await browser.close(); } catch (e) {}
             throw new Error('InvalidCredentials');
@@ -195,16 +195,16 @@ export async function login(username: string, password: string, showBrowser: boo
         try {
             const cur = page.url();
             if (cur.includes('/opal-view/#/account/cards')) {
-                console.log('Login successful');
+                console.log('[Login] Login successful');
                 return context;
             }
         } catch (e) {}
 
-        console.error('Login failed: timeout or unexpected response');
+        console.error('[Login] Login failed: timeout or unexpected response');
         try { if (browser) await browser.close(); } catch (e) {}
         throw new Error('LoginFailed');
     } catch (err: any) {
-        console.error('Login failed:', err && err.message ? err.message : err);
+        console.error('[Login] Login failed:', err && err.message ? err.message : err);
         try { if (browser) await browser.close(); } catch (e) {}
         throw err;
     }
@@ -274,9 +274,9 @@ export async function getTransactions(
 ): Promise<any[]> {
 
     const page = context.pages()[0];
-    console.log('getTransactions: Starting...');
+    // console.log('getTransactions: Starting...');
     await page.goto("https://transportnsw.info/opal-view/#/account/cards", { waitUntil: "networkidle" });
-    console.log('getTransactions: Page loaded');
+    // console.log('getTransactions: Page loaded');
 
     const results: any[] = [];
     const pad = (n: number) => n.toString().padStart(2, "0");
@@ -359,7 +359,7 @@ export async function getTransactions(
     // -------------------- collect cards --------------------
     await page.waitForSelector('.opal-selector__item', { timeout: 1000 });
     const cardEls = await page.$$('.opal-selector__item');
-    console.log(`getTransactions: Found ${cardEls.length} card elements`);
+    // console.log(`getTransactions: Found ${cardEls.length} card elements`);
     const cards = [];
     for (const el of cardEls) {
         const text = (await el.innerText()).trim();
@@ -367,13 +367,13 @@ export async function getTransactions(
         const blocked = text.toLowerCase().includes("blocked");
         cards.push({ element: el, blocked, name: text.split("\n")[0].trim() });
     }
-    console.log(`getTransactions: Found ${cards.length} valid cards (non-blocked)`);
+    // console.log(`getTransactions: Found ${cards.length} valid cards (non-blocked)`);
 
     // -------------------- month selector --------------------
     const monthSelector = await page.$('select.month-view-selector');
     if (!monthSelector) throw new Error("Month selector not found");
     const monthOptions = await monthSelector.$$('option');
-    console.log(`getTransactions: Found ${monthOptions.length} month options`);
+    // console.log(`getTransactions: Found ${monthOptions.length} month options`);
 
     // Parse month labels into {label, value, month, year}
     const monthNameMap: { [k: string]: number } = {
@@ -518,7 +518,7 @@ export async function getTransactions(
 
             const activityExists = await page.$(".activity-by-date-container");
             if (!activityExists) {
-                console.log(`Month ${m.label}: no activity containers; scraped 0 transactions`);
+                // console.log(`Month ${m.label}: no activity containers; scraped 0 transactions`);
                 continue;
             }
 
@@ -579,7 +579,7 @@ export async function getTransactions(
 
             const afterCount = results.length;
             const monthCount = afterCount - beforeCount;
-            console.log(`Month ${m.label}: scraped ${monthCount} transactions`);
+            // console.log(`Month ${m.label}: scraped ${monthCount} transactions`);
             
             completedSteps++;
             emitProgress();
@@ -587,7 +587,7 @@ export async function getTransactions(
     }
     // -------------------- DATE FILTER --------------------
     const filtered = filterByDateRange(results, startDate, endDate);
-    console.log(`getTransactions: Returning ${filtered.length} transactions after filtering`);
+    // console.log(`getTransactions: Returning ${filtered.length} transactions after filtering`);
 
     // Determine output filename based on provided date boundaries
     let filename: string;

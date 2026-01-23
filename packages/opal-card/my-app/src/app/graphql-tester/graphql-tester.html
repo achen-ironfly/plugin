@@ -1,0 +1,53 @@
+<div class="graphql-tester">
+  <h2>GraphQL API Tester</h2>
+  
+  <!-- Credentials Input -->
+  <div class="credentials-section">
+    <h3>Authentication</h3>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input 
+        id="username" 
+        type="text" 
+        [(ngModel)]="username" 
+        placeholder="Enter username"
+        [disabled]="authLoading || accountLoading || transactionLoading"
+      />
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input 
+        id="password" 
+        type="password" 
+        [(ngModel)]="password" 
+        placeholder="Enter password"
+        [disabled]="authLoading || accountLoading || transactionLoading"
+      />
+    </div>
+
+    <div class="button-group">
+      <button 
+        (click)="callAuth()" 
+        [disabled]="authLoading"
+        class="btn btn-auth"
+      >
+        {{ authLoading ? 'Loading...' : 'Auth' }}
+      </button>
+      <button 
+        (click)="callAccount()" 
+        [disabled]="accountLoading"
+        class="btn btn-account"
+      >
+        {{ accountLoading ? 'Loading...' : 'Account' }}
+      </button>
+      <button 
+        (click)="callTransaction()" 
+        [disabled]="transactionLoading"
+        class="btn btn-transaction"
+      >
+        {{ transactionLoading ? 'Loading...' : 'Transaction' }}
+      </button>
+    </div>
+  </div>
+</div>

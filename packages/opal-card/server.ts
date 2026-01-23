@@ -8,6 +8,19 @@ async function main() {
     const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 
     app.use(express.json({ limit: '10mb' }));
+    
+    // Enable CORS for all requests
+    app.use((req, res, next) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+        res.setHeader('Access-Control-Max-Age', '3600');
+        if (req.method === 'OPTIONS') {
+            return res.sendStatus(200);
+        }
+        next();
+    });
+    
     app.use('/', express.static(path.join(__dirname, 'my-app', 'public')));
 
     let transactionStore: any[] = [];
