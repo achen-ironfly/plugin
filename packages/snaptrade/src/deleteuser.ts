@@ -28,10 +28,10 @@ async function main() {
     const snaptrade = await initClient();
     // await deleteUser(snaptrade, userId);
     await deleteUser(snaptrade, "achen@ironflytechnologies.com1");
-    await deleteUser(snaptrade, "achen@ironflytechnologies.com2");
-    await deleteUser(snaptrade, "achen@ironflytechnologies.com3");
-    await deleteUser(snaptrade, "achen@ironflytechnologies.com4");
-    await deleteUser(snaptrade, "achen@ironflytechnologies.com5");
+    // await deleteUser(snaptrade, "achen@ironflytechnologies.com2");
+    // await deleteUser(snaptrade, "achen@ironflytechnologies.com3");
+    // await deleteUser(snaptrade, "achen@ironflytechnologies.com4");
+    // await deleteUser(snaptrade, "achen@ironflytechnologies.com5");
 
 }
 

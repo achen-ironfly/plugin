@@ -27,12 +27,12 @@ export const resolvers = {
                     const currentUrl = page.url();
                     return {
                         response: currentUrl,
-                        identifier: "authenticated true"
+                        identifier: id
                     };
                 }
                 return {
-                    response: null,
-                    identifier: "authenticated false"
+                    response: "authenticated false",
+                    identifier: null
                 }; 
             });                      
         }
