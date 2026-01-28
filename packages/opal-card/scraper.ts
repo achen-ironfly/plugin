@@ -420,11 +420,11 @@ export async function getTransactions(
         const earliest = monthsParsed[0];
         const earliestDT = DateTime.fromObject({ year: earliest.year, month: earliest.month + 1, day: 1 }, { zone: 'Australia/Sydney' }).startOf('day');
         startDate = earliestDT.toJSDate();
-        console.log(`startDate not provided; defaulting to earliest available month ${fmtDate(startDate)}`);
+        // console.log(`startDate not provided; defaulting to earliest available month ${fmtDate(startDate)}`);
     }
     if (!endDate) {
         endDate = todaySydneyDT.toJSDate();
-        console.log(`endDate not provided; defaulting to today (Sydney) ${fmtDate(endDate)}`);
+        // console.log(`endDate not provided; defaulting to today (Sydney) ${fmtDate(endDate)}`);
     }
 
     // Compute startMY/endMY from startDate/endDate
@@ -498,7 +498,7 @@ export async function getTransactions(
     // -------------------- iterate cards and months --------------------
     for (const card of cards) {
         if (card.blocked) continue;
-        console.log(`Scraping card: ${card.name}`);
+        console.log(`[transaction] Scraping card: ${card.name}`);
         await card.element.click();
         // scraper  to get last balance
         const balanceTextEl = await card.element.$('.opal-selector__card-value');

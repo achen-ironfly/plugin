@@ -123,7 +123,7 @@ async function registerUser(userId: string): Promise<string | null> {
         return null;
     }
     
-    console.log(data);
+    // console.log(data);
     return data.userSecret;
 }
 
@@ -171,7 +171,7 @@ async function generateUrl(userId: string, userSecret: string): Promise<string> 
     });
 
     const data = await response.json() as { redirectURI: string };
-    console.log("Connection URL response:", data);
+    // console.log("Connection URL response:", data);
     return data.redirectURI;
 }
 
@@ -183,7 +183,7 @@ async function connect(redirectURI: string) {
     const page = await browser.newPage();
     await page.goto(redirectURI);
     await page.waitForURL('**/connection-complete/**', { timeout: 1200000 }); 
-    console.log("Connection completed successfully");
+    // console.log("Connection completed successfully");
     await browser.close();
 }
 
@@ -209,7 +209,7 @@ async function listAccounts(userId: string, userSecret: string): Promise<any> {
     });
 
     const data = await response.json();
-    console.log("Accounts:", data);
+    // console.log("Accounts:", data);
     return data;
 }
 
@@ -235,7 +235,7 @@ async function accountBalances(accountId: string, userId: string, userSecret: st
     });
 
     const data = await response.json();
-    console.log("Account Balances:", data);
+    // console.log("Account Balances:", data);
     return data;
 }
 
@@ -261,7 +261,7 @@ async function accountActivities(accountId: string, userId: string, userSecret: 
     });
 
     const data = await response.json();
-    console.log("Account Activities:", data);
+    // console.log("Account Activities:", data);
     return data;
 }
 
@@ -349,7 +349,9 @@ async function main() {
     process.exit(0);
 }
 
-main();
+if (require.main === module) {
+    main();
+}
 
 export {
     getApiStatus,

@@ -32,8 +32,9 @@ export const resolvers = {
                 }
  
                 const url = await generateUrl(payload.id, userSecret);
-                await connect(url);
+                // await connect(url);
                     
+                console.log('[auth] URL has been generated.');
                 return {
                     response: url,
                     identifier: JSON.stringify({
@@ -55,7 +56,6 @@ export const resolvers = {
                 let userId: string | undefined;
                 let userSecret: string | undefined;
 
-                // Parse identifier to get userId and userSecret
                 const parsed = JSON.parse(args.identifier);
                 userId = parsed.userId;
                 userSecret = parsed.userSecret;
@@ -65,12 +65,24 @@ export const resolvers = {
                 }
 
                 const accounts = await listAccounts(userId, userSecret);
-                if (!accounts || accounts.length === 0) return [];
+                // console.log('Accounts received:', accounts);
+                
+                if (!accounts || accounts.length === 0) {
+                    console.log('No accounts found');
+                    return [];
+                }
 
                 const targetAccount = accounts[0];
-                const balances = await accountBalances(targetAccount.id, userId, userSecret);
+                const balances = await accountBalances(targetAccount.id, userId, userSecret);               
                 const normalized = normalizeAccounts([targetAccount], balances);
+                // console.log('Normalized accounts:', normalized);
+                
+                if (!normalized || normalized.length === 0) {
+                    console.log('No normalized accounts returned');
+                    return [];
+                }
 
+                console.log('[account] get account successful.');
                 return [
                     {
                         id: normalized[0].id,
@@ -112,6 +124,7 @@ export const resolvers = {
                 );
                 const transactions = normalizeTransactions(activities?.data || []);
 
+                console.log('[transaction] get transactions successful.');
                 return transactions.map((tx: any) => ({
                     transactionId: tx.transactionId,
                     transactionTime: tx.transactionTime,

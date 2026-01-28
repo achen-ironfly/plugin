@@ -411,7 +411,7 @@ async function main() {
     await createGraphQLServer(app);
 
     app.listen(PORT, () => {
-        console.log(`Server running at http://localhost:${PORT}/scraper.html`);
+        // console.log(`Server running at http://localhost:${PORT}/graphql`);
     });
 }
 

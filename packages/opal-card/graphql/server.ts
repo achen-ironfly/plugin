@@ -4,7 +4,7 @@ import { readFileSync } from 'fs';
 import path from 'path';
 import { resolvers } from './resolvers';
 
-export async function createGraphQLServer(app: any) {
+export async function createGraphQLServer(app: any, port: number = 8080) {
   const typeDefs = readFileSync(
     path.join(__dirname, 'schema.graphql'),
     'utf8'
@@ -18,4 +18,5 @@ export async function createGraphQLServer(app: any) {
   await server.start();
 
   app.use('/graphql', expressMiddleware(server));
+  console.log(`Server running at http://localhost:${port}/graphql`);
 }
